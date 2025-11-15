@@ -1,10 +1,456 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a1512;
+            color: #e8d9c5;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #211c18;
+            border-right: 1px solid #3d3228;
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cc785c 0%, #b5654d 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .profile h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e8d9c5;
+        }
+
+        .profile p {
+            color: #a18872;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #a18872;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover, .nav a.active {
+            background: #1a1512;
+            color: #cc785c;
+        }
+
+        .nav a::before {
+            content: '📄';
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .nav a[href="#projects"]::before { content: '📁'; }
+        .nav a[href="#events"]::before { content: '🏷️'; }
+        .nav a[href="#archives"]::before { content: '📚'; }
+        .nav a[href="#about"]::before { content: '👤'; }
+
+        .social {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3d3228;
+        }
+
+        .social a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .social a:hover {
+            color: #cc785c;
+        }
+
+        .social br {
+            display: none;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            width: 100%;
+        }
+
+                /* Right Sidebar */
+        .right-sidebar {
+            position: fixed;
+            right: 2rem;
+            top: 3rem;
+            width: 200px;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+            .panel {
+            background: transparent;
+            border: none;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .panel h3 {
+            color: #e8d9c5;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .panel-list {
+            list-style: none;
+        }
+        
+        .panel-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .panel-list a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            display: block;
+            line-height: 1.6;
+        }
+        
+        .panel-list a:hover {
+            color: #cc785c;
+        }
+        
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #e8d9c5;
+            margin-bottom: 0.5rem;
+        }
+
+        .posts {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: #211c18;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 1px solid #3d3228;
+        }
+
+        .post-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(204,120,92,0.2);
+            border-color: #cc785c;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #a18872;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-date::before {
+            content: '📅';
+            margin-right: 0.25rem;
+        }
+
+        .post-category {
+            background: #3d2e23;
+            color: #d4a574;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            color: #e8d9c5;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .post-excerpt {
+            color: #a18872;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            color: #cc785c;
+            font-size: 0.85rem;
+            text-decoration: none;
+        }
+
+        .tag::before {
+            content: '#';
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 100%;
+            }
+        }
+
+        
+    </style>
 </head>
 <body>
-    <h1>Hello World!</h1>
-    <p>Welcome Armenian Infosec Community!</p>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="images/AIC_logo.png" alt="Profile Picture" class="avatar">
+                <h1>Armenian Infosec Community</h1>
+                <p>Welcome!</p>
+            </div>
+
+            <nav>
+                <ul class="nav">
+                    <li><a href="#about" class="active">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <!-- 
+                    <li><a href="#archives">Archives</a></li>
+                    <li><a href="#about">About</a></li> -->
+                </ul>
+            </nav>
+
+            <div class="social">
+                <a href="https://github.com/Armenian-Infosec-Community" title="GitHub" target="_blank">
+                    GitHub 🐙
+                </a>
+                <br>
+                <a href="https://t.me/+4tjTBk0jC0E3NDRi" title="Telegram" target="_blank">
+                    Telegram 🐦
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="content-wrapper">
+            <header class="header">
+                <h2>About</h2>
+            </header>
+
+            <div class="posts">
+                <!-- Post 1 -->
+                <article class="post-card" id="post-1">
+                    <div class="post-meta">
+                        <span class="post-date">May 26, 2025</span>
+                        <span class="post-category">Greeting</span>
+                    </div>
+                    <h3 class="post-title">Who We Are 🦊</h3>
+                    <p class="post-excerpt">
+                        The Armenian InfoSec Community is a community-driven initiative created to bring together cybersecurity professionals, students, enthusiasts, and anyone curious about the world of information security.
+We aim to build a welcoming, collaborative, and genuinely supportive space where people can learn, teach, grow, and contribute — regardless of their background or experience level.
+                    </p>
+                    <div></div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card" id="post-2">
+                    <div class="post-meta">
+                        <span class="post-date">May 26, 2025</span>
+                        <span class="post-category">Greeting</span>
+                    </div>
+                    <h3 class="post-title">How We Started? 🌠</h3>
+                    <p class="post-excerpt">
+                        The Armenian InfoSec Community began with a simple goal:
+to create a warm, open, and collaborative space for cybersecurity enthusiasts in Armenia.
+
+Over time, it became clear that many people in our field — especially beginners — were looking for a community where they could learn comfortably, ask questions freely, and connect with others without pressure or judgement. At the same time, many experienced professionals were eager to share their knowledge, support newcomers, and contribute to a healthy local InfoSec ecosystem.
+
+Seeing this need and the potential for something meaningful, the initiative was started as a community-driven effort to bring people together, strengthen local talent, and build a culture of openness, mentorship, and mutual respect.
+
+<br><br>Our first meetup on August 15, 2025 showed just how much this kind of environment was needed, and since then, the community has continued to grow with positive energy and shared purpose.
+                    </p>
+                    <div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post-card" id="post-3">
+                    <div class="post-meta">
+                        <span class="post-date">May 26, 2025</span>
+                        <span class="post-category">Greeting</span>
+                    </div>
+                    <h3 class="post-title">Our Purpose 🧠</h3>
+                    <p class="post-excerpt">
+💡 Foster knowledge-sharing and continuous learning <br>
+
+🤝 Connect people across all InfoSec domains <br>
+
+💬 Encourage mentorship and collaboration<br>
+
+🛡️ Promote ethical, responsible cybersecurity practices<br>
+
+🌱 Create opportunities for newcomers and professionals alike<br>
+
+🌍 Represent Armenia in the global security ecosystem      <br>              </p>
+                    <div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="post-card" id="post-4">
+                    <div class="post-meta">
+                        <span class="post-date">May 26, 2025</span>
+                        <span class="post-category">Greeting</span>
+                    </div>
+                    <h3 class="post-title">Our Values 🫶</h3>
+                    <p class="post-excerpt">
+We keep things simple and human:<br>  
+<ul>
+<li>Be polite<br> </li>
+
+<li>Don’t judge<br>  </li>
+
+<li>Don’t be toxic<br>  </li>
+
+<li>Constructive discussions only<br>  </li>
+
+<li>No gatekeeping<br>   </li>
+
+<li>It’s okay not to know      <br>  </li>             </p>
+                    <div>
+                    </div>
+                </article>
+                               <!-- Post 5 -->
+                <article class="post-card" id="post-5">
+                    <div class="post-meta">
+                        <span class="post-date">May 26, 2025</span>
+                        <span class="post-category">Greeting</span>
+                    </div>
+                    <h3 class="post-title">Lore ⚔️</h3>
+                    <p class="post-excerpt">
+Once upon a time, in a small but brilliant corner of the world, there were curious minds who loved solving puzzles, protecting secrets, and exploring the invisible world of the internet.<br> 
+They worked alone, each guarding their own castle of knowledge.
+But one day, they realized… the battles were getting bigger, the dragons of cyber threats were growing stronger, and the magic of teamwork was the only way to win. <br>
+So, they decided to gather under one roof — to share their spells, sharpen their swords, and build a kingdom where knowledge flows freely, every voice is heard, and no one fights alone. <br>
+And that’s how the Armenian Infosec Community was born —
+a place where heroes are made, legends are shared, and the story of a safer digital world begins. 
+
+          </p>
+                    <div>
+                    </div>
+                </article>
+            </div>
+            </div>
+        </main>
+    <!-- Right Sidebar -->
+<aside class="right-sidebar">
+    <!-- Table of Contents -->
+    <div class="panel">
+        <h3>Contents</h3>
+        <ul class="panel-list">
+            <li><a href="#post-1">Who We Are</a></li>
+            <li><a href="#post-2">How We Started?</a></li>
+            <li><a href="#post-3">Our Purpose</a></li>
+            <li><a href="#post-4">Our Values</a></li>
+            <li><a href="#post-5">Lore</a></li>
+        </ul>
+    </div>
+</aside>
+    </div>
 </body>
 </html>
