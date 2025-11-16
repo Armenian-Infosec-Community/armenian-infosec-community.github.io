@@ -89,15 +89,13 @@
         }
 
         .nav a::before {
-            content: '📄';
+            content: '👤';
             margin-right: 0.75rem;
             font-size: 1.2rem;
         }
 
-        .nav a[href="#projects"]::before { content: '📁'; }
-        .nav a[href="#events"]::before { content: '🏷️'; }
-        .nav a[href="#archives"]::before { content: '📚'; }
-        .nav a[href="#about"]::before { content: '👤'; }
+        .nav a[href*="projects"]::before { content: '💼'; }
+        .nav a[href*="events"]::before { content: '📅'; }
 
         .social {
             display: flex;
@@ -306,7 +304,7 @@
             <nav>
                 <ul class="nav">
                     <li><a href="#about" class="active">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="projects.html">Projects</a></li>
                     <li><a href="#events">Events</a></li>
                     <!-- 
                     <li><a href="#archives">Archives</a></li>

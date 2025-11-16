@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects AIC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a1512;
+            color: #e8d9c5;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #211c18;
+            border-right: 1px solid #3d3228;
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cc785c 0%, #b5654d 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .profile h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e8d9c5;
+        }
+
+        .profile p {
+            color: #a18872;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #a18872;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover, .nav a.active {
+            background: #1a1512;
+            color: #cc785c;
+        }
+
+        .nav a::before {
+            content: '👤';
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .nav a[href*="projects"]::before { content: '💼'; }
+        .nav a[href*="events"]::before { content: '📅'; }
+
+        .social {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3d3228;
+        }
+
+        .social a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .social a:hover {
+            color: #cc785c;
+        }
+        
+        .social br {
+            display: none;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .content-wrapper {
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        /* Right Sidebar */
+        .right-sidebar {
+            position: fixed;
+            right: 2rem;
+            top: 3rem;
+            width: 200px;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+        
+        .panel {
+            background: transparent;
+            border: none;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .panel h3 {
+            color: #e8d9c5;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .panel-list {
+            list-style: none;
+        }
+        
+        .panel-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .panel-list a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            display: block;
+            line-height: 1.6;
+        }
+        
+        .panel-list a:hover {
+            color: #cc785c;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #e8d9c5;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Projects Table */
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .project-item {
+            background: #211c18;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #3d3228;
+        }
+
+        .project-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(204,120,92,0.2);
+            border-color: #cc785c;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            color: #e8d9c5;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .project-info {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1rem;
+        }
+
+        .project-label {
+            color: #a18872;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .project-value {
+            color: #e8d9c5;
+            font-size: 0.9rem;
+        }
+
+        .project-value a {
+            color: #cc785c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .project-value a:hover {
+            color: #d4a574;
+            text-decoration: underline;
+        }
+
+        .contributors {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .contributor-tag {
+            background: #1a1512;
+            color: #cc785c;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            
+            .content-wrapper {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                 <img src="images/AIC_logo.png" alt="Profile Picture" class="avatar">
+                <h1>Armenian Infosec Community</h1>
+                <p>Our Projects</p>
+            </div>
+
+            <nav>
+                <ul class="nav">
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="events.html">Events</a></li>
+                </ul>
+            </nav>
+
+            <div class="social">
+                <a href="https://github.com/Armenian-Infosec-Community" title="GitHub" target="_blank">
+                    GitHub 🐙
+                </a>
+                <br>
+                <a href="https://t.me/+4tjTBk0jC0E3NDRi" title="Telegram" target="_blank">
+                    Telegram 🐦
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="content-wrapper">
+                <header class="header">
+                    <h2>Our Projects</h2>
+                </header>
+
+                <div class="projects-grid">
+                    <!-- Project 1 -->
+                    <div class="project-item" id="project-1">
+                        <h3 class="project-title">Capture The Flag Challenges 🚩</h3>
+                        <div class="project-info">
+                            <div class="project-row">
+                                <span class="project-label">Link:</span>
+                                <span class="project-value">
+                                    <a href="https://github.com/Armenian-Infosec-Community/CTFs" target="_blank">github.com/Armenian-Infosec-Community/CTFs</a>
+                                </span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Purpose:</span>
+                                <span class="project-value">CTF challenges for learning and knowledge sharing</span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Lead:</span>
+                                <span class="project-value">-</span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Contributors:</span>
+                                <span class="project-value">
+                                    <div class="contributors">
+                                        <span class="contributor-tag">p055e55eD</span>
+                                        <span class="contributor-tag">albert666h</span>
+                                        <span class="contributor-tag">var77</span>
+                                        <span class="contributor-tag">Sevada797</span>
+                                        <span class="contributor-tag">PizzaPablo666</span>
+                                        <span class="contributor-tag">5ud0-u53r</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-item" id="project-2">
+                        <h3 class="project-title">Armenian Infosec Community Website</h3>
+                        <div class="project-info">
+                            <div class="project-row">
+                                <span class="project-label">Link:</span>
+                                <span class="project-value">
+                                    <a href="https://github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io" target="_blank">github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io</a>
+                                </span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Purpose:</span>
+                                <span class="project-value">Comprehensive malware analysis with static and dynamic capabilities</span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Lead:</span>
+                                <span class="project-value">Mane Hambardzumyan</span>
+                            </div>
+                            <div class="project-row">
+                                <span class="project-label">Contributors:</span>
+                                <span class="project-value">
+                                    <div class="contributors">
+                                        <span class="contributor-tag">PizzaPablo666</span>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Table of Contents -->
+            <div class="panel">
+                <h3>Projects</h3>
+                <ul class="panel-list">
+                    <li><a href="#project-1">Capture The Flag Challenges</a></li>
+                    <li><a href="#project-2">Armenian Infosec Community Website</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
