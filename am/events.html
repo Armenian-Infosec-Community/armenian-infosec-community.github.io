@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events AIC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a1512;
+            color: #e8d9c5;
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #211c18;
+            border-right: 1px solid #3d3228;
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cc785c 0%, #b5654d 100%);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .profile h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #e8d9c5;
+        }
+
+        .profile p {
+            color: #a18872;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #a18872;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav a:hover, .nav a.active {
+            background: #1a1512;
+            color: #cc785c;
+        }
+
+        .nav a::before {
+            content: '👤';
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .nav a[href*="projects"]::before { content: '💼'; }
+        .nav a[href*="events"]::before { content: '📅'; }
+
+        .social {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #3d3228;
+        }
+
+        .social a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .social a:hover {
+            color: #cc785c;
+        }
+
+        .social br {
+            display: none;
+        }
+
+        /* Main Content */
+        .main {
+            margin-left: 260px;
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-wrapper {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            position: fixed;
+            right: 2rem;
+            top: 3rem;
+            width: 200px;
+            max-height: calc(100vh - 6rem);
+            overflow-y: auto;
+        }
+
+        .panel {
+            background: transparent;
+            border: none;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel h3 {
+            color: #e8d9c5;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-list {
+            list-style: none;
+        }
+
+        .panel-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .panel-list a {
+            color: #a18872;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+            display: block;
+            line-height: 1.6;
+        }
+
+        .panel-list a:hover {
+            color: #cc785c;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            margin-bottom: 2rem;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #e8d9c5;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Events */
+        .events-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .event-item {
+            background: #211c18;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #3d3228;
+        }
+
+        .event-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(204,120,92,0.2);
+            border-color: #cc785c;
+        }
+
+        .event-status {
+            display: inline-block;
+            background: #1a1512;
+            color: #cc785c;
+            border: 1px solid #cc785c;
+            padding: 0.15rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            color: #e8d9c5;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .event-info {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .event-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1rem;
+        }
+
+        .event-label {
+            color: #a18872;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .event-value {
+            color: #e8d9c5;
+            font-size: 0.9rem;
+        }
+
+        .event-value a {
+            color: #cc785c;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .event-value a:hover {
+            color: #d4a574;
+            text-decoration: underline;
+        }
+
+        .event-note {
+            color: #a18872;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1400px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+        }
+
+
+        .language-switcher {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #3d3228;
+            text-align: center;
+        }
+
+        .lang-button {
+            display: inline-block;
+            color: #e8d9c5;
+            background: #1a1512;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid #3d3228;
+        }
+
+        .lang-button:hover {
+            background: #cc785c;
+            color: #1a1512;
+            border-color: #cc785c;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="/images/AIC_logo.png" alt="Profile Picture" class="avatar">
+                <h1>Հայաստանի Ինֆոսեք Համայնք</h1>
+                <p>Միջոցառումներ</p>
+            </div>
+
+            <nav>
+                <ul class="nav">
+                    <li><a href="/am/index.html" >Մեր Մասին</a></li>
+                    <li><a href="/am/projects.html">Պրոյեկտներ</a></li>
+                    <li><a href="/am/events.html" class="active">Միջոցառումներ</a></li>
+                </ul>
+            </nav>
+
+            <div class="social">
+                <a href="https://github.com/Armenian-Infosec-Community" title="GitHub" target="_blank">
+                    GitHub 🐙
+                </a>
+                <br>
+                <a href="https://t.me/+4tjTBk0jC0E3NDRi" title="Telegram" target="_blank">
+                    Telegram 🐦
+                </a>
+            </div>
+
+            <div class="language-switcher">
+                <a href="/events.html" class="lang-button">English</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="content-wrapper">
+                <header class="header">
+                    <h2>Առաջիկա Միջոցառումներ</h2>
+                </header>
+
+                <div class="events-grid">
+                    <!-- Meetup #4 -->
+                    <div class="event-item" id="meetup-4">
+                        <span class="event-status">Առաջիկա</span>
+                        <h3 class="event-title">Armenian Infosec Community Meetup #4 👏</h3>
+                        <div class="event-info">
+                            <div class="event-row">
+                                <span class="event-label">Ամսաթիվ:</span>
+                                <span class="event-value">Շաբաթ, 7 նոյեմբերի, 2026</span>
+                            </div>
+                            <div class="event-row">
+                                <span class="event-label">Ժամ:</span>
+                                <span class="event-value">15:40</span>
+                            </div>
+                            <div class="event-row">
+                                <span class="event-label">Վայր:</span>
+                                <span class="event-value">
+                                    <a href="https://tumolabs.am/en/" target="_blank">TUMO Labs</a>, Հալաբյան 2Ա, Երևան
+                                </span>
+                            </div>
+                        </div>
+                        <p class="event-note">Բանախոսները կհայտարարվեն շուտով — հետևեք մեզ LinkedIn-ում և Telegram-ում։</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- Table of Contents -->
+            <div class="panel">
+                <h3>Միջոցառումներ</h3>
+                <ul class="panel-list">
+                    <li><a href="#meetup-4">Meetup #4</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
