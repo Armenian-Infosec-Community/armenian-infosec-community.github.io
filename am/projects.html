@@ -4,513 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Պրոյեկտներ | AIC</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #1a1512;
-            color: #e8d9c5;
-            line-height: 1.6;
-        }
-
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 260px;
-            background: #211c18;
-            border-right: 1px solid #3d3228;
-            padding: 2rem 1.5rem;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #cc785c 0%, #b5654d 100%);
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        .profile h1 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #e8d9c5;
-        }
-
-        .profile p {
-            color: #a18872;
-            font-size: 0.9rem;
-        }
-
-        .nav {
-            list-style: none;
-            margin-top: 2rem;
-        }
-
-        .nav li {
-            margin-bottom: 0.5rem;
-        }
-
-        .nav a {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            color: #a18872;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .nav a:hover, .nav a.active {
-            background: #1a1512;
-            color: #cc785c;
-        }
-
-        .nav a::before {
-            content: '👤';
-            margin-right: 0.75rem;
-            font-size: 1.2rem;
-        }
-
-        .nav a[href*="projects"]::before { content: '💼'; }
-        .nav a[href*="events"]::before { content: '📅'; }
-
-        .social {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #3d3228;
-        }
-
-        .social a {
-            color: #a18872;
-            text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-
-        .social a:hover {
-            color: #cc785c;
-        }
-        
-        .social br {
-            display: none;
-        }
-
-        /* Main Content */
-        .main {
-            margin-left: 260px;
-            flex: 1;
-            padding: 3rem;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .content-wrapper {
-            max-width: 800px;
-            width: 100%;
-        }
-        
-        /* Right Sidebar */
-        .right-sidebar {
-            position: fixed;
-            right: 2rem;
-            top: 3rem;
-            width: 200px;
-            max-height: calc(100vh - 6rem);
-            overflow-y: auto;
-        }
-        
-        .panel {
-            background: transparent;
-            border: none;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .panel h3 {
-            color: #e8d9c5;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .panel-list {
-            list-style: none;
-        }
-        
-        .panel-list li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .panel-list a {
-            color: #a18872;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-            display: block;
-            line-height: 1.6;
-        }
-        
-        .panel-list a:hover {
-            color: #cc785c;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-
-        .header {
-            margin-bottom: 2rem;
-        }
-
-        .header h2 {
-            font-size: 2rem;
-            color: #e8d9c5;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Projects Table */
-        .projects-grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .project-item {
-            background: #211c18;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #3d3228;
-        }
-
-        .project-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 16px rgba(204,120,92,0.2);
-            border-color: #cc785c;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            color: #e8d9c5;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .project-info {
-            display: grid;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-row {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 1rem;
-        }
-
-        .project-label {
-            color: #a18872;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .project-value {
-            color: #e8d9c5;
-            font-size: 0.9rem;
-        }
-
-        .project-value a {
-            color: #cc785c;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .project-value a:hover {
-            color: #d4a574;
-            text-decoration: underline;
-        }
-
-        .contributors {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .contributor-tag {
-            background: #1a1512;
-            color: #cc785c;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 1400px) {
-            .right-sidebar {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .main {
-                margin-left: 0;
-                padding: 1.5rem;
-            }
-            
-            .content-wrapper {
-                max-width: 100%;
-            }
-        }
-
-
-                .language-switcher {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #3d3228;
-            text-align: center;
-        }
-
-        .lang-button {
-            display: inline-block;
-            color: #e8d9c5;
-            background: #1a1512;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            border: 1px solid #3d3228;
-        }
-
-        .lang-button:hover {
-            background: #cc785c;
-            color: #1a1512;
-            border-color: #cc785c;
-        }
-
-        /* Mobile: the sidebar becomes a compact header so navigation stays available */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                position: static;
-                width: 100%;
-                height: auto;
-                overflow-y: visible;
-                border-right: none;
-                border-bottom: 1px solid #3d3228;
-                padding: 1.5rem;
-            }
-
-            .profile {
-                margin-bottom: 1rem;
-            }
-
-            .avatar {
-                width: 72px;
-                height: 72px;
-                margin-bottom: 0.5rem;
-            }
-
-            .profile h1 {
-                font-size: 1.25rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-
-            .nav li {
-                margin-bottom: 0;
-            }
-
-            .nav a {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.9rem;
-            }
-
-            .nav a::before {
-                margin-right: 0.5rem;
-                font-size: 1rem;
-            }
-
-            .social {
-                flex-direction: row;
-                justify-content: center;
-                gap: 1.5rem;
-                margin-top: 1rem;
-                padding-top: 1rem;
-            }
-
-            .language-switcher {
-                margin-top: 1rem;
-                padding-top: 1rem;
-            }
-
-            .project-value a {
-                overflow-wrap: anywhere;
-            }
-        }
-    </style>
+    <meta name="description" content="Հայաստանի Ինֆոսեք Համայնքի բաց պրոյեկտները, այդ թվում՝ CTF մարտահրավերներ։">
+    <link rel="icon" href="/images/aic-mark.svg" type="image/svg+xml">
+    <link rel="alternate" hreflang="en" href="https://infosec-community.am/projects.html">
+    <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="profile">
-                 <img src="/images/AIC_logo.png" alt="Profile Picture" class="avatar">
-                <h1>Հայաստանի Ինֆոսեք Համայնք</h1>
-                <p>Մեր Պրոյեկտները</p>
-            </div>
-
-            <nav>
-                <ul class="nav">
-                    <li><a href="/am/index.html" >Մեր Մասին</a></li>
-                    <li><a href="/am/projects.html" class="active">Պրոյեկտներ</a></li>
-                    <li><a href="/am/events.html">Միջոցառումներ</a></li>
-                </ul>
+    <a class="skip" href="#main">Անցնել բովանդակությանը</a>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="/am/"><svg aria-hidden="true"><use href="/assets/icons.svg#mark"></use></svg><span>Հայաստանի Ինֆոսեք Համայնք</span></a>
+            <nav class="site-nav" aria-label="Հիմնական">
+                <a class="navlink" href="/am/about.html">Մեր Մասին</a>
+                <a class="navlink" href="/am/projects.html" aria-current="page">Պրոյեկտներ</a>
+                <a class="navlink" href="/am/events.html">Միջոցառումներ</a>
+                <a class="lang" href="/projects.html" lang="en">English</a>
+                <a class="btn btn-primary btn-small" href="https://t.me/+4tjTBk0jC0E3NDRi" target="_blank" rel="noopener">Միանալ</a>
             </nav>
+        </div>
+    </header>
 
-            <div class="social">
-                <a href="https://github.com/Armenian-Infosec-Community" title="GitHub" target="_blank">
-                    GitHub 🐙
-                </a>
-                <br>
-                <a href="https://t.me/+4tjTBk0jC0E3NDRi" title="Telegram" target="_blank">
-                    Telegram 🐦
-                </a>
+    <main id="main">
+        <section class="hero page-hero">
+            <svg class="hero-arches" aria-hidden="true" viewBox="0 0 720 1600">
+                <path class="arch" pathLength="1" d="M40 1600 V340 A320 320 0 0 1 680 340 V1600"></path>
+                <path class="arch a2" pathLength="1" d="M120 1600 V340 A240 240 0 0 1 600 340 V1600"></path>
+                <path class="arch a3" pathLength="1" d="M200 1600 V340 A160 160 0 0 1 520 340 V1600"></path>
+                <path class="arch a4" pathLength="1" d="M280 1600 V340 A80 80 0 0 1 440 340 V1600"></path>
+            </svg>
+            <div class="wrap hero-inner">
+                <p class="label rise">~/projects</p>
+                <h1 class="rise d1">Մեր Պրոյեկտները</h1>
+                <p class="hero-lede rise d2">Համայնքային պրոյեկտներ, որոնք կարող ես ուսումնասիրել և որոնց կարող ես մասնակցել GitHub-ում։</p>
             </div>
+        </section>
 
-            <div class="language-switcher">
-                <a href="/projects.html" class="lang-button">English</a>
-            </div>
-        </aside>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main">
-            <div class="content-wrapper">
-                <header class="header">
-                    <h2>Մեր Պրոյեկտները</h2>
-                </header>
-
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <div class="project-item" id="project-1">
-                        <h3 class="project-title">Capture The Flag Challenges 🚩</h3>
-                        <div class="project-info">
-                            <div class="project-row">
-                                <span class="project-label">Հղում:</span>
-                                <span class="project-value">
-                                    <a href="https://github.com/Armenian-Infosec-Community/CTFs" target="_blank">github.com/Armenian-Infosec-Community/CTFs</a>
-                                </span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Նպատակ:</span>
-                                <span class="project-value">CTF մարտահրավերներ՝ ուսուցման և գիտելիքների փոխանակման համար</span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Ղեկավար:</span>
-                                <span class="project-value">-</span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Մասնակիցներ:</span>
-                                <span class="project-value">
-                                    <div class="contributors">
-                                        <span class="contributor-tag">p055e55eD</span>
-                                        <span class="contributor-tag">albert666h</span>
-                                        <span class="contributor-tag">var77</span>
-                                        <span class="contributor-tag">Sevada797</span>
-                                        <span class="contributor-tag">PizzaPablo666</span>
-                                        <span class="contributor-tag">5ud0-u53r</span>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-item" id="project-2">
-                        <h3 class="project-title">Armenian Infosec Community Website</h3>
-                        <div class="project-info">
-                            <div class="project-row">
-                                <span class="project-label">Հղում:</span>
-                                <span class="project-value">
-                                    <a href="https://github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io" target="_blank">github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io</a>
-                                </span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Նպատակ:</span>
-                                <span class="project-value">Հայաստանի Ինֆոսեք Համայնքի պաշտոնական կայքը</span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Ղեկավար:</span>
-                                <span class="project-value">Mane Hambardzumyan</span>
-                            </div>
-                            <div class="project-row">
-                                <span class="project-label">Մասնակիցներ:</span>
-                                <span class="project-value">
-                                    <div class="contributors">
-                                        <span class="contributor-tag">PizzaPablo666</span>
-                                        <span class="contributor-tag">Sandro-Hakobyan</span>
-                                    </div>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                   
+        <section class="rule">
+            <div class="wrap sec">
+                <div class="cards">
+                    <article class="card" id="ctf">
+                        <svg class="card-icon ic-red" aria-hidden="true"><use href="/assets/icons.svg#flag"></use></svg>
+                        <h2 class="h3">Capture The Flag Challenges</h2>
+                        <dl class="info">
+                            <div><dt>Նպատակ</dt><dd>CTF մարտահրավերներ՝ ուսուցման և գիտելիքների փոխանակման համար</dd></div>
+                            <div><dt>Հղում</dt><dd><a href="https://github.com/Armenian-Infosec-Community/CTFs" target="_blank" rel="noopener">github.com/Armenian-Infosec-Community/CTFs</a></dd></div>
+                            <div><dt>Մասնակիցներ</dt><dd><div class="chips"><span class="chip">p055e55eD</span><span class="chip">albert666h</span><span class="chip">var77</span><span class="chip">Sevada797</span><span class="chip">PizzaPablo666</span><span class="chip">5ud0-u53r</span></div></dd></div>
+                        </dl>
+                        <a class="textlink" href="https://github.com/Armenian-Infosec-Community/CTFs" target="_blank" rel="noopener"><span>Դիտել GitHub-ում</span><svg aria-hidden="true"><use href="/assets/icons.svg#arrow"></use></svg></a>
+                    </article>
+                    <article class="card" id="website">
+                        <svg class="card-icon ic-blue" aria-hidden="true"><use href="/assets/icons.svg#code"></use></svg>
+                        <h2 class="h3">Armenian Infosec Community Website</h2>
+                        <dl class="info">
+                            <div><dt>Նպատակ</dt><dd>Հայաստանի Ինֆոսեք Համայնքի պաշտոնական կայքը</dd></div>
+                            <div><dt>Հղում</dt><dd><a href="https://github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io" target="_blank" rel="noopener">github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io</a></dd></div>
+                            <div><dt>Ղեկավար</dt><dd>Mane Hambardzumyan</dd></div>
+                            <div><dt>Մասնակիցներ</dt><dd><div class="chips"><span class="chip">PizzaPablo666</span><span class="chip">Sandro-Hakobyan</span></div></dd></div>
+                        </dl>
+                        <a class="textlink" href="https://github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io" target="_blank" rel="noopener"><span>Դիտել GitHub-ում</span><svg aria-hidden="true"><use href="/assets/icons.svg#arrow"></use></svg></a>
+                    </article>
                 </div>
             </div>
-        </main>
+        </section>
+    </main>
 
-        <!-- Right Sidebar -->
-        <aside class="right-sidebar">
-            <!-- Table of Contents -->
-            <div class="panel">
-                <h3>Պրոյեկտներ</h3>
-                <ul class="panel-list">
-                    <li><a href="#project-1">Capture The Flag Challenges</a></li>
-                    <li><a href="#project-2">Armenian Infosec Community Website</a></li>
-                </ul>
-            </div>
-        </aside>
-    </div>
+    <footer class="site-footer">
+        <div class="wrap">
+            <span class="copyright"><svg aria-hidden="true"><use href="/assets/icons.svg#mark"></use></svg><span>© 2026 Հայաստանի Ինֆոսեք Համայնք։ Բոլոր իրավունքները պաշտպանված են։</span></span>
+            <nav aria-label="Ստորին">
+                <a class="foot" href="/am/about.html">Մեր Մասին</a>
+                <a class="foot" href="/am/projects.html">Պրոյեկտներ</a>
+                <a class="foot" href="/am/events.html">Միջոցառումներ</a>
+                <a class="foot" href="https://github.com/Armenian-Infosec-Community" target="_blank" rel="noopener">GitHub</a>
+                <a class="foot" href="https://t.me/+4tjTBk0jC0E3NDRi" target="_blank" rel="noopener">Telegram</a>
+            </nav>
+        </div>
+    </footer>
 </body>
 </html>
