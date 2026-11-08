@@ -71,7 +71,7 @@ ul { padding: 0; list-style: none; }
 
 /* Hero */
 .hero { position: relative; overflow: hidden; }
-.hero-arches { position: absolute; top: 0; right: -40px; width: 720px; height: 1600px; pointer-events: none; }
+.hero-arches { position: absolute; top: 0; right: max(-40px, calc(50% - 760px)); width: 720px; height: 1600px; pointer-events: none; }
 .arch { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 1; animation: draw 2.2s cubic-bezier(0.4, 0, 0.2, 1) both; }
 .arch.a2 { animation-delay: 0.2s; }
 .arch.a3 { animation-delay: 0.4s; stroke: var(--blue); }
@@ -195,6 +195,14 @@ ul { padding: 0; list-style: none; }
   .tl-progress { transform-origin: left; animation: growx linear both; animation-timeline: view(); animation-range: entry 40% cover 55%; }
   .arches { view-timeline-name: --arches; }
   .arc { transform-box: fill-box; animation: arcrise linear both; animation-timeline: --arches; }
+}
+
+/* Large screens: scale the whole page so it does not look small */
+@media (min-width: 2000px) {
+  html { zoom: 1.3; }
+}
+@media (min-width: 3200px) {
+  html { zoom: 1.75; }
 }
 
 @media (max-width: 1120px) {
