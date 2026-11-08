@@ -133,12 +133,12 @@ ul { padding: 0; list-style: none; }
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 32px; }
 .stack { display: grid; gap: 32px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip { background: var(--ground); color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 13px; }
+.chip { background: var(--ground); color: var(--accent); padding: 4px 12px; border-radius: 15px; font-size: 13px; white-space: nowrap; }
 .status { align-self: flex-start; font-family: var(--font-mono); font-size: 13px; padding: 2px 12px; border-radius: 15px; border: 1px solid var(--border); color: var(--muted); }
 .status.next { border-color: var(--blue); color: var(--blue); }
 .card .textlink { margin-top: auto; }
 .info { display: grid; gap: 12px; }
-.info div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; }
+.info > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; }
 .info dt { color: var(--muted); font-size: 15px; font-weight: 600; }
 .info dd { font-size: 15px; overflow-wrap: anywhere; }
 
@@ -217,7 +217,7 @@ ul { padding: 0; list-style: none; }
 }
 @media (max-width: 760px) {
   .split { grid-template-columns: minmax(0, 1fr); }
-  .info div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .info > div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
