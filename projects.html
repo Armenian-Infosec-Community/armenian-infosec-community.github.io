@@ -281,10 +281,6 @@
         }
         
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            
             .main {
                 margin-left: 0;
                 padding: 1.5rem;
@@ -321,6 +317,76 @@
             border-color: #cc785c;
         }
 
+        /* Mobile: the sidebar becomes a compact header so navigation stays available */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow-y: visible;
+                border-right: none;
+                border-bottom: 1px solid #3d3228;
+                padding: 1.5rem;
+            }
+
+            .profile {
+                margin-bottom: 1rem;
+            }
+
+            .avatar {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile h1 {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .nav li {
+                margin-bottom: 0;
+            }
+
+            .nav a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav a::before {
+                margin-right: 0.5rem;
+                font-size: 1rem;
+            }
+
+            .social {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .language-switcher {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .project-value a {
+                overflow-wrap: anywhere;
+            }
+        }
     </style>
 </head>
 <body>
@@ -411,7 +477,7 @@
                             </div>
                             <div class="project-row">
                                 <span class="project-label">Purpose:</span>
-                                <span class="project-value">Comprehensive malware analysis with static and dynamic capabilities</span>
+                                <span class="project-value">Official website of the Armenian Infosec Community</span>
                             </div>
                             <div class="project-row">
                                 <span class="project-label">Lead:</span>

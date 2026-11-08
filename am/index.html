@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIC Community</title>
+    <title>Հայաստանի Ինֆոսեք Համայնք</title>
     <style>
         * {
             margin: 0;
@@ -274,10 +274,6 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            
             .main {
                 margin-left: 0;
                 padding: 1.5rem;
@@ -312,6 +308,76 @@
             border-color: #cc785c;
         }
         
+        /* Mobile: the sidebar becomes a compact header so navigation stays available */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow-y: visible;
+                border-right: none;
+                border-bottom: 1px solid #3d3228;
+                padding: 1.5rem;
+            }
+
+            .profile {
+                margin-bottom: 1rem;
+            }
+
+            .avatar {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile h1 {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .nav li {
+                margin-bottom: 0;
+            }
+
+            .nav a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav a::before {
+                margin-right: 0.5rem;
+                font-size: 1rem;
+            }
+
+            .social {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .language-switcher {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .project-value a {
+                overflow-wrap: anywhere;
+            }
+        }
     </style>
 </head>
 <body>
@@ -357,8 +423,8 @@
                 <!-- Post 1 -->
                 <article class="post-card" id="post-1">
                     <div class="post-meta">
-                        <span class="post-date">May 26, 2025</span>
-                        <span class="post-category">Greeting</span>
+                        <span class="post-date">26 մայիսի, 2025</span>
+                        <span class="post-category">Ողջույն</span>
                     </div>
                     <h3 class="post-title">Ով ենք Մենք 🦊</h3>
                     <p class="post-excerpt">
@@ -371,8 +437,8 @@
                 <!-- Post 2 -->
                 <article class="post-card" id="post-2">
                     <div class="post-meta">
-                        <span class="post-date">May 26, 2025</span>
-                        <span class="post-category">Greeting</span>
+                        <span class="post-date">26 մայիսի, 2025</span>
+                        <span class="post-category">Ողջույն</span>
                     </div>
                     <h3 class="post-title">Ինչպես Ամեն Ինչ Սկսվեց 🌠</h3>
                     <p class="post-excerpt">
@@ -387,8 +453,8 @@
                 <!-- Post 3 -->
                 <article class="post-card" id="post-3">
                     <div class="post-meta">
-                        <span class="post-date">May 26, 2025</span>
-                        <span class="post-category">Greeting</span>
+                        <span class="post-date">26 մայիսի, 2025</span>
+                        <span class="post-category">Ողջույն</span>
                     </div>
                     <h3 class="post-title">Մեր Նպատակը 🧠</h3>
                     <p class="post-excerpt">
@@ -410,8 +476,8 @@
                 <!-- Post 4 -->
                 <article class="post-card" id="post-4">
                     <div class="post-meta">
-                        <span class="post-date">May 26, 2025</span>
-                        <span class="post-category">Greeting</span>
+                        <span class="post-date">26 մայիսի, 2025</span>
+                        <span class="post-category">Ողջույն</span>
                     </div>
                     <h3 class="post-title">Մեր Արժեքները 🫶</h3>
                     <p class="post-excerpt">
@@ -434,8 +500,8 @@
                                <!-- Post 5 -->
                 <article class="post-card" id="post-5">
                     <div class="post-meta">
-                        <span class="post-date">May 26, 2025</span>
-                        <span class="post-category">Greeting</span>
+                        <span class="post-date">26 մայիսի, 2025</span>
+                        <span class="post-category">Ողջույն</span>
                     </div>
                     <h3 class="post-title">Ավանդազրույց ⚔️</h3>
                     <p class="post-excerpt">
@@ -455,7 +521,7 @@
 <aside class="right-sidebar">
     <!-- Table of Contents -->
     <div class="panel">
-        <h3>Contents</h3>
+        <h3>Բովանդակություն</h3>
         <ul class="panel-list">
             <li><a href="#post-1">Ով ենք Մենք</a></li>
             <li><a href="#post-2">Ինչպես Ամեն Ինչ Սկսվեց</a></li>
