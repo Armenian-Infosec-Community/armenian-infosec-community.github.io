@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hy">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects AIC</title>
+    <title>Պրոյեկտներ | AIC</title>
     <style>
         * {
             margin: 0;
@@ -281,10 +281,6 @@
         }
         
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-            
             .main {
                 margin-left: 0;
                 padding: 1.5rem;
@@ -321,6 +317,76 @@
             border-color: #cc785c;
         }
 
+        /* Mobile: the sidebar becomes a compact header so navigation stays available */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow-y: visible;
+                border-right: none;
+                border-bottom: 1px solid #3d3228;
+                padding: 1.5rem;
+            }
+
+            .profile {
+                margin-bottom: 1rem;
+            }
+
+            .avatar {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile h1 {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .nav li {
+                margin-bottom: 0;
+            }
+
+            .nav a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav a::before {
+                margin-right: 0.5rem;
+                font-size: 1rem;
+            }
+
+            .social {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .language-switcher {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .project-value a {
+                overflow-wrap: anywhere;
+            }
+        }
     </style>
 </head>
 <body>
@@ -370,21 +436,21 @@
                         <h3 class="project-title">Capture The Flag Challenges 🚩</h3>
                         <div class="project-info">
                             <div class="project-row">
-                                <span class="project-label">Link:</span>
+                                <span class="project-label">Հղում:</span>
                                 <span class="project-value">
                                     <a href="https://github.com/Armenian-Infosec-Community/CTFs" target="_blank">github.com/Armenian-Infosec-Community/CTFs</a>
                                 </span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Purpose:</span>
-                                <span class="project-value">CTF challenges for learning and knowledge sharing</span>
+                                <span class="project-label">Նպատակ:</span>
+                                <span class="project-value">CTF մարտահրավերներ՝ ուսուցման և գիտելիքների փոխանակման համար</span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Lead:</span>
+                                <span class="project-label">Ղեկավար:</span>
                                 <span class="project-value">-</span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Contributors:</span>
+                                <span class="project-label">Մասնակիցներ:</span>
                                 <span class="project-value">
                                     <div class="contributors">
                                         <span class="contributor-tag">p055e55eD</span>
@@ -404,21 +470,21 @@
                         <h3 class="project-title">Armenian Infosec Community Website</h3>
                         <div class="project-info">
                             <div class="project-row">
-                                <span class="project-label">Link:</span>
+                                <span class="project-label">Հղում:</span>
                                 <span class="project-value">
                                     <a href="https://github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io" target="_blank">github.com/Armenian-Infosec-Community/armenian-infosec-community.github.io</a>
                                 </span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Purpose:</span>
-                                <span class="project-value">Comprehensive malware analysis with static and dynamic capabilities</span>
+                                <span class="project-label">Նպատակ:</span>
+                                <span class="project-value">Հայաստանի Ինֆոսեք Համայնքի պաշտոնական կայքը</span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Lead:</span>
+                                <span class="project-label">Ղեկավար:</span>
                                 <span class="project-value">Mane Hambardzumyan</span>
                             </div>
                             <div class="project-row">
-                                <span class="project-label">Contributors:</span>
+                                <span class="project-label">Մասնակիցներ:</span>
                                 <span class="project-value">
                                     <div class="contributors">
                                         <span class="contributor-tag">PizzaPablo666</span>
@@ -438,7 +504,7 @@
         <aside class="right-sidebar">
             <!-- Table of Contents -->
             <div class="panel">
-                <h3>Projects</h3>
+                <h3>Պրոյեկտներ</h3>
                 <ul class="panel-list">
                     <li><a href="#project-1">Capture The Flag Challenges</a></li>
                     <li><a href="#project-2">Armenian Infosec Community Website</a></li>

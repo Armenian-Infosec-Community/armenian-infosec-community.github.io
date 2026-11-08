@@ -283,10 +283,6 @@
         }
 
         @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-
             .main {
                 margin-left: 0;
                 padding: 1.5rem;
@@ -323,6 +319,76 @@
             border-color: #cc785c;
         }
 
+        /* Mobile: the sidebar becomes a compact header so navigation stays available */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+                overflow-y: visible;
+                border-right: none;
+                border-bottom: 1px solid #3d3228;
+                padding: 1.5rem;
+            }
+
+            .profile {
+                margin-bottom: 1rem;
+            }
+
+            .avatar {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile h1 {
+                font-size: 1.25rem;
+                margin-bottom: 0.25rem;
+            }
+
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+
+            .nav li {
+                margin-bottom: 0;
+            }
+
+            .nav a {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .nav a::before {
+                margin-right: 0.5rem;
+                font-size: 1rem;
+            }
+
+            .social {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .language-switcher {
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .project-value a {
+                overflow-wrap: anywhere;
+            }
+        }
     </style>
 </head>
 <body>
@@ -362,13 +428,13 @@
         <main class="main">
             <div class="content-wrapper">
                 <header class="header">
-                    <h2>Upcoming Events</h2>
+                    <h2>Events</h2>
                 </header>
 
                 <div class="events-grid">
                     <!-- Meetup #4 -->
                     <div class="event-item" id="meetup-4">
-                        <span class="event-status">Upcoming</span>
+                        <span class="event-status">Past</span>
                         <h3 class="event-title">Armenian Infosec Community Meetup #4 👏</h3>
                         <div class="event-info">
                             <div class="event-row">
@@ -385,14 +451,7 @@
                                     <a href="https://tumolabs.am/en/" target="_blank">TUMO Labs</a>, 2A Halabyan St, Yerevan
                                 </span>
                             </div>
-                            <div class="event-row">
-                                <span class="event-label">Registration:</span>
-                                <span class="event-value">
-                                    <a href="https://luma.com/cibw7tty" target="_blank">Register here</a>
-                                </span>
-                            </div>
                         </div>
-                        <p class="event-note">Speakers will be announced soon, follow us on LinkedIn and Telegram.</p>
                     </div>
                 </div>
             </div>
